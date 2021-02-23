@@ -1,0 +1,1 @@
+'From Pharo8.0.0 of 27 March 2020 [Build information: Pharo-8.0.0+build.1136.sha.a153e04ae4e325509ed78bfe25c9ce560afb24b0 (64 Bit)] on 23 February 2021 at 9:56:15.076272 am'!Object subclass: #ChainList	instanceVariableNames: 'head tail'	classVariableNames: ''	package: 'ChainList'!
