@@ -50,6 +50,14 @@ NChainListTest >> testContainsElt [
 ]
 
 { #category : #tests }
+NChainListTest >> testEltAt [
+	l add: 0.
+	l add: 1.
+	l add: 2.
+	self assert: (l eltAt: 1) equals: 1
+]
+
+{ #category : #tests }
 NChainListTest >> testEquals [ 
 	| list |
 	list := ChainList new
@@ -68,6 +76,14 @@ NChainListTest >> testIncrementSize [
 	len := (l size).
 	l add: 0.
 	self assert: (l size) equals: (len + 1) 
+]
+
+{ #category : #tests }
+NChainListTest >> testIndexErrorEltAt [
+	l add: 0.
+	l add: 1.
+	l add: 2.
+	self should: [ l eltAt: 5 ] raise: IndexError 
 ]
 
 { #category : #tests }
