@@ -3,13 +3,15 @@ Class {
 	#superclass : #Object,
 	#instVars : [
 		'head',
-		'tail'
+		'tail',
+		'size'
 	],
 	#category : #ChainList
 }
 
 { #category : #adding }
 ChainList >> add: anObject [ 
+	size := size + 1.
 	head ifNil: [ 
 		head := anObject.
 		 ^ anObject 
@@ -35,9 +37,20 @@ ChainList >> head [
 	^ head.
 ]
 
+{ #category : #initialization }
+ChainList >> initialize [ 
+	super initialize.
+	size := 0. 
+]
+
 { #category : #testing }
 ChainList >> isEmpty [ 
 	^ (head isNil) and: (tail isNil)
+]
+
+{ #category : #accessing }
+ChainList >> size [ 
+	^ size
 ]
 
 { #category : #accessing }
