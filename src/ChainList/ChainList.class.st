@@ -85,7 +85,12 @@ ChainList >> removeElt: anObject [
 		 ].
 	res := (tail removeElt: anObject).
 	size := size - res.
-	^ res. 
+	^ res.
+
+	
+	
+	
+
 ]
 
 { #category : #accessing }
