@@ -100,6 +100,35 @@ NChainListTest >> testNotEquals [
 ]
 
 { #category : #tests }
+NChainListTest >> testNotRemoveElt [
+	| list |
+	list := ChainList new
+	add: 0;
+	add: 1;
+	add: 2;
+	yourself.
+	l add: 0.
+	l add: 1.
+	l add: 2.
+	l removeElt: 5.
+	self assert: list = l 
+]
+
+{ #category : #tests }
+NChainListTest >> testRemoveElt [
+	| list |
+	list := ChainList new
+	add: 0;
+	add: 2;
+	yourself.
+	l add: 0.
+	l add: 1.
+	l add: 2.
+	l removeElt: 1.
+	self assert: list = l 
+]
+
+{ #category : #tests }
 NChainListTest >> testSize [
 	l add: 0.
 	l add: 1.
