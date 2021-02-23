@@ -50,6 +50,17 @@ NChainListTest >> testContainsElt [
 ]
 
 { #category : #tests }
+NChainListTest >> testEquals [ 
+	| list |
+	list add: 0.
+	list add: 1.
+	l add: 0.
+	l add: 1.
+	self assert: l = list
+	
+]
+
+{ #category : #tests }
 NChainListTest >> testInitializeChainList [
 	self assert: (l head) isNil.
 	self assert: (l tail) isNil.  
