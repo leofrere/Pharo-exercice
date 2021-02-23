@@ -72,3 +72,11 @@ NChainListTest >> testNotContainsElt [
 	l add: 1.
 	self assert: (l contains: 2) equals: false
 ]
+
+{ #category : #tests }
+NChainListTest >> testSize [
+	l add: 0.
+	l add: 1.
+	l add: 2.
+	self assert: (l size) equals: 3 
+]
