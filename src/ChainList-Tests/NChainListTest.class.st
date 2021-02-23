@@ -89,7 +89,7 @@ NChainListTest >> testForEach [
 	l add: 1.
 	l add: 2.
 	l add: 3.
-	list forEach: [ :each | list add: each ].
+	l forEach: [ :each | list add: each ].
 	self assert: list size equals: 4
 	
 ]

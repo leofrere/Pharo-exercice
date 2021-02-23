@@ -62,6 +62,16 @@ ChainList >> eltAt: index [
 	^ tail eltAt: index-1
 ]
 
+{ #category : #'as yet unclassified' }
+ChainList >> forEach: block [ 
+	tail ifNil: [ block value: head ].
+	tail ifNotNil: [ 
+		block value: head.
+		tail forEach: block.
+		 ]
+	 
+]
+
 { #category : #comparing }
 ChainList >> hash [
 	"Answer an integer value that is related to the identity of the receiver."
