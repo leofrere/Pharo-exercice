@@ -87,6 +87,15 @@ NChainListTest >> testIndexErrorEltAt [
 ]
 
 { #category : #tests }
+NChainListTest >> testIndexErrorRemoveAt [ 
+	l add: 0.
+	l add: 1.
+	l add: 2.
+	l add: 3.
+	self should: [ l removeAt: 5 ] raise: IndexError 
+]
+
+{ #category : #tests }
 NChainListTest >> testIndexOf [ 	
 	l add: 0.
 	l add: 1.
@@ -180,6 +189,22 @@ NChainListTest >> testNotRemoveElt [
 	l add: 2.
 	l removeElt: 5.
 	self assert: list equals: l 
+]
+
+{ #category : #tests }
+NChainListTest >> testRemoveAt [
+	| list |.
+	list := ChainList new 
+	add: 0;
+	add: 1;
+	add: 3;
+	yourself.  
+	l add: 0.
+	l add: 1.
+	l add: 2.
+	l add: 3.
+	l removeAt: 2.
+	self assert: (l = list)
 ]
 
 { #category : #tests }
