@@ -82,6 +82,19 @@ NChainListTest >> testEquals [
 ]
 
 { #category : #tests }
+NChainListTest >> testForEach [
+	| list |.
+	list := ChainList new.
+	l add: 0.
+	l add: 1.
+	l add: 2.
+	l add: 3.
+	list forEach: [ :each | list add: each ].
+	self assert: list size equals: 4
+	
+]
+
+{ #category : #tests }
 NChainListTest >> testIncrementSize [
 	| len |.
 	len := (l size).
