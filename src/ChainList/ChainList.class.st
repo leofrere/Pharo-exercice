@@ -67,6 +67,14 @@ ChainList >> isEmpty [
 	^ (head isNil) and: (tail isNil)
 ]
 
+{ #category : #accessing }
+ChainList >> lastIndexOf: anObject [ 
+	(self contains: anObject) ifFalse:[ ^ -1 ].
+	head = anObject ifTrue: [ ^ 1 max: (tail lastIndexOf: anObject) ].
+	^ 1 + (tail lastIndexOf: anObject) 
+	
+]
+
 { #category : #removing }
 ChainList >> removeElt: anObject [
 	| res |.
