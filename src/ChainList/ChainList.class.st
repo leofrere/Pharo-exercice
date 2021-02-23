@@ -23,6 +23,13 @@ ChainList >> add: anObject [
 	^ anObject  
 ]
 
+{ #category : #comparing }
+ChainList >> contains: anObject [ 
+	head = anObject ifTrue: [ ^ true ].
+	tail ifNil: [ ^ head = anObject  ].
+	^ tail contains: anObject 
+]
+
 { #category : #accessing }
 ChainList >> head [ 
 	^ head.
