@@ -56,6 +56,13 @@ ChainList >> head [
 	^ head.
 ]
 
+{ #category : #accessing }
+ChainList >> indexOf: anObject [ 
+	(self contains: anObject) ifFalse: [ ^ -1 ].
+	head = anObject ifTrue: [ ^ 0 ].
+	^ 1 + (tail indexOf: anObject)
+]
+
 { #category : #initialization }
 ChainList >> initialize [ 
 	super initialize.
