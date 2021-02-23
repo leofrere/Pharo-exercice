@@ -87,6 +87,19 @@ NChainListTest >> testNotContainsElt [
 ]
 
 { #category : #tests }
+NChainListTest >> testNotEquals [ 
+	| list |
+	list := ChainList new
+	add: 0;
+	add: 2;
+	yourself.
+	l add: 0.
+	l add: 1.
+	self assert: (l = list) equals: false
+	
+]
+
+{ #category : #tests }
 NChainListTest >> testSize [
 	l add: 0.
 	l add: 1.
