@@ -4,27 +4,31 @@ This class contains tests for ChainList
 Class {
 	#name : #NChainListTest,
 	#superclass : #TestCase,
+	#instVars : [
+		'l'
+	],
 	#category : #'ChainList-Tests'
 }
 
+{ #category : #running }
+NChainListTest >> setUp [
+	super setUp. 
+	l := ChainList new.
+
+]
+
 { #category : #tests }
 NChainListTest >> testAccessHead [
-	| l |
-	l := ChainList new.
 	self assert: (l head) isNil. 
 ]
 
 { #category : #tests }
 NChainListTest >> testAccessTail [
-	| l |
-	l := ChainList new.
 	self assert: (l tail) isNil.
 ]
 
 { #category : #tests }
 NChainListTest >> testAddMoreOneObject [
-	| l |
-	l := ChainList new.
 	l add: 0.
 	l add: 1.
 	self assert: ((l tail) head) equals: 1.
@@ -32,8 +36,6 @@ NChainListTest >> testAddMoreOneObject [
 
 { #category : #tests }
 NChainListTest >> testAddOneObject [
-	| l |
-	l := ChainList new.
 	l add: 0.
 	self assert: (l head) equals: 0.
 
@@ -42,8 +44,16 @@ NChainListTest >> testAddOneObject [
 
 { #category : #tests }
 NChainListTest >> testInitializeChainList [
-	| l |
-	l := ChainList new.
 	self assert: (l head) isNil.
 	self assert: (l tail) isNil.  
+]
+
+{ #category : #tests }
+NChainListTest >> testIsEmpty [ 
+	self assert: (l isEmpty)
+]
+
+{ #category : #tests }
+NChainListTest >> testIsNotEmpty [ 
+	self assert: (l isEmpty) equals: false
 ]
