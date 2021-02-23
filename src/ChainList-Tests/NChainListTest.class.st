@@ -101,6 +101,19 @@ NChainListTest >> testLastIndexOf [
 ]
 
 { #category : #tests }
+NChainListTest >> testNoLastIndexOf [ 
+	l add: 0.
+	l add: 1.
+	l add: 2.
+	l add: 3.
+	l add: 1.
+	l add: 2.
+	l add: 3.
+	self assert: (l lastIndexOf: 5) equals: -1
+	
+]
+
+{ #category : #tests }
 NChainListTest >> testNotContainsElt [
 	l add: 0.
 	l add: 1.
