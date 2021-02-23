@@ -43,6 +43,13 @@ NChainListTest >> testAddOneObject [
 ]
 
 { #category : #tests }
+NChainListTest >> testContainsElt [
+	l add: 0.
+	l add: 1.
+	self assert: (l contains: 1)
+]
+
+{ #category : #tests }
 NChainListTest >> testInitializeChainList [
 	self assert: (l head) isNil.
 	self assert: (l tail) isNil.  
@@ -57,4 +64,11 @@ NChainListTest >> testIsEmpty [
 NChainListTest >> testIsNotEmpty [ 
 	l add: 0.
 	self assert: (l isEmpty) equals: false
+]
+
+{ #category : #tests }
+NChainListTest >> testNotContainsElt [
+	l add: 0.
+	l add: 1.
+	self assert: (l contains: 2) equals: false
 ]
