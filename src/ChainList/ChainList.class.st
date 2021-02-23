@@ -44,6 +44,13 @@ ChainList >> contains: anObject [
 	^ tail contains: anObject 
 ]
 
+{ #category : #accessing }
+ChainList >> eltAt: index [ 
+	index >= size ifTrue: [ IndexError new signal: 'IndexOutOfBoundError' ].
+	index = 0 ifTrue: [ ^ head ].
+	^ tail eltAt: index-1
+]
+
 { #category : #comparing }
 ChainList >> hash [
 	"Answer an integer value that is related to the identity of the receiver."
