@@ -43,6 +43,17 @@ NChainListTest >> testAddOneObject [
 ]
 
 { #category : #tests }
+NChainListTest >> testChangeValueAt [
+	l add: 0.
+	l add: 1.
+	l add: 2.
+	l add: 3.
+	l changeValueAt: 2 and: 42.
+	self assert: (l eltAt: 2) equals: 42
+	
+]
+
+{ #category : #tests }
 NChainListTest >> testContainsElt [
 	l add: 0.
 	l add: 1.
@@ -76,6 +87,16 @@ NChainListTest >> testIncrementSize [
 	len := (l size).
 	l add: 0.
 	self assert: (l size) equals: (len + 1) 
+]
+
+{ #category : #tests }
+NChainListTest >> testIndexErrorChangeValueAt [
+	l add: 0.
+	l add: 1.
+	l add: 2.
+	l add: 3.
+	self should: [ l changeValueAt: 5 and: 42 ] raise: IndexError
+	
 ]
 
 { #category : #tests }
