@@ -37,6 +37,17 @@ ChainList >> add: anObject [
 	^ anObject  
 ]
 
+{ #category : #accessing }
+ChainList >> changeValueAt: index and: anObject [ 
+	index >= size ifTrue: [ IndexError new signal: 'IndexOutOfBoundError' ].
+	index = 0 ifTrue: [ 
+		head := anObject.
+		^ true 
+		 ].
+	^ tail changeValueAt: index-1 and: anObject 
+	
+]
+
 { #category : #comparing }
 ChainList >> contains: anObject [ 
 	head = anObject ifTrue: [ ^ true ].
