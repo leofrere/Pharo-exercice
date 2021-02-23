@@ -52,8 +52,10 @@ NChainListTest >> testContainsElt [
 { #category : #tests }
 NChainListTest >> testEquals [ 
 	| list |
-	list add: 0.
-	list add: 1.
+	list := ChainList new
+	add: 0;
+	add: 1;
+	yourself.
 	l add: 0.
 	l add: 1.
 	self assert: l = list

@@ -9,6 +9,18 @@ Class {
 	#category : #ChainList
 }
 
+{ #category : #comparing }
+ChainList >> = anObject [
+	"Answer whether the receiver and anObject represent the same object."
+
+	self == anObject
+		ifTrue: [ ^ true ].
+	self class = anObject class
+		ifFalse: [ ^ false ].
+	^ head = anObject head
+		and: [ tail = anObject tail and: [ size = anObject size ] ]
+]
+
 { #category : #adding }
 ChainList >> add: anObject [ 
 	size := size + 1.
@@ -30,6 +42,13 @@ ChainList >> contains: anObject [
 	head = anObject ifTrue: [ ^ true ].
 	tail ifNil: [ ^ head = anObject  ].
 	^ tail contains: anObject 
+]
+
+{ #category : #comparing }
+ChainList >> hash [
+	"Answer an integer value that is related to the identity of the receiver."
+
+	^ head hash bitXor: (tail hash bitXor: size hash)
 ]
 
 { #category : #accessing }
