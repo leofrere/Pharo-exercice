@@ -67,6 +67,27 @@ ChainList >> isEmpty [
 	^ (head isNil) and: (tail isNil)
 ]
 
+{ #category : #removing }
+ChainList >> removeElt: anObject [
+	| res |.
+	head = anObject ifTrue: [ 
+		head := (tail head).
+		tail := (tail tail).
+		size := size -1.
+		^ 1
+		 ].
+	(tail  tail) ifNil: [ 
+		(tail head) = anObject ifTrue: [ 
+			tail := nil.
+			^ 1
+			 ].
+		^ 0
+		 ].
+	res := (tail removeElt: anObject).
+	size := size - res.
+	^ res. 
+]
+
 { #category : #accessing }
 ChainList >> size [ 
 	^ size

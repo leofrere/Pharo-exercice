@@ -63,6 +63,14 @@ NChainListTest >> testEquals [
 ]
 
 { #category : #tests }
+NChainListTest >> testIncrementSize [
+	| len |.
+	len := (l size).
+	l add: 0.
+	self assert: (l size) equals: (len + 1) 
+]
+
+{ #category : #tests }
 NChainListTest >> testInitializeChainList [
 	self assert: (l head) isNil.
 	self assert: (l tail) isNil.  
@@ -111,7 +119,7 @@ NChainListTest >> testNotRemoveElt [
 	l add: 1.
 	l add: 2.
 	l removeElt: 5.
-	self assert: list = l 
+	self assert: list equals: l 
 ]
 
 { #category : #tests }
@@ -125,7 +133,7 @@ NChainListTest >> testRemoveElt [
 	l add: 1.
 	l add: 2.
 	l removeElt: 1.
-	self assert: list = l 
+	self assert: (list = l) 
 ]
 
 { #category : #tests }
