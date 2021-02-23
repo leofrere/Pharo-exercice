@@ -71,6 +71,15 @@ NChainListTest >> testIncrementSize [
 ]
 
 { #category : #tests }
+NChainListTest >> testIndexOf [ 	
+	l add: 0.
+	l add: 1.
+	l add: 2.
+	l add: 3.
+	self assert: (l indexOf: 2) equals: 2
+]
+
+{ #category : #tests }
 NChainListTest >> testInitializeChainList [
 	self assert: (l head) isNil.
 	self assert: (l tail) isNil.  
@@ -131,6 +140,15 @@ NChainListTest >> testNotEquals [
 	l add: 1.
 	self assert: (l = list) equals: false
 	
+]
+
+{ #category : #tests }
+NChainListTest >> testNotIndexOf [ 	
+	l add: 0.
+	l add: 1.
+	l add: 2.
+	l add: 3.
+	self assert: (l indexOf: 5) equals: -1
 ]
 
 { #category : #tests }
