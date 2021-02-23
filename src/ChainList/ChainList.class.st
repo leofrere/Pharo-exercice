@@ -90,6 +90,22 @@ ChainList >> lastIndexOf: anObject [
 ]
 
 { #category : #removing }
+ChainList >> removeAt: index [ 
+	index >= size ifTrue: [ IndexError new signal: 'IndexOutOfBoundError' ].
+	size := size -1.
+	index = 0 ifTrue: [ 
+		head := tail head.
+		tail := tail tail.
+		^ true
+		 ].
+	(index = 1 and: tail tail isNil)  ifTrue: [ 
+		tail := nil.
+		^ true
+		 ].
+	^ tail removeAt: index-1
+]
+
+{ #category : #removing }
 ChainList >> removeElt: anObject [
 	(self contains: anObject)ifFalse: [ ^ false ]. 
 	size := size -1.
