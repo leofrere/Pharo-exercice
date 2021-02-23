@@ -77,23 +77,18 @@ ChainList >> lastIndexOf: anObject [
 
 { #category : #removing }
 ChainList >> removeElt: anObject [
-	| res |.
+	(self contains: anObject)ifFalse: [ ^ false ]. 
+	size := size -1.
 	head = anObject ifTrue: [ 
 		head := (tail head).
 		tail := (tail tail).
-		size := size -1.
-		^ 1
+		^ true
 		 ].
 	(tail  tail) ifNil: [ 
-		(tail head) = anObject ifTrue: [ 
 			tail := nil.
-			^ 1
-			 ].
-		^ 0
+			^ true
 		 ].
-	res := (tail removeElt: anObject).
-	size := size - res.
-	^ res.
+	^ (tail removeElt: anObject)
 
 	
 	
