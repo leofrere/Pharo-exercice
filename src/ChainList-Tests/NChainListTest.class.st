@@ -55,5 +55,6 @@ NChainListTest >> testIsEmpty [
 
 { #category : #tests }
 NChainListTest >> testIsNotEmpty [ 
+	l add: 0.
 	self assert: (l isEmpty) equals: false
 ]

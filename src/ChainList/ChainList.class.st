@@ -28,6 +28,11 @@ ChainList >> head [
 	^ head.
 ]
 
+{ #category : #testing }
+ChainList >> isEmpty [ 
+	^ (head isNil) and: (tail isNil)
+]
+
 { #category : #accessing }
 ChainList >> tail [ 
 	^ tail.
