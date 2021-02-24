@@ -26,6 +26,32 @@ PharoDoc >> generateClassStyle: anClass [
 ]
 
 { #category : #html }
+PharoDoc >> generateClasseDoc: anStream and: anClasse with: anColor [
+	| color classe |
+	classe:= anClasse name.
+	color := 'dark'.
+	anColor='W' ifTrue: [ color := 'clear' ].
+	anStream nextPutAll: '<tr class="',color,'">'.
+	anStream nextPutAll: '<td> <a href="',classe,'.html">',classe,'</a> </td>'.
+	anStream nextPutAll: '</tr>'.
+	self generateClassDoc: anClasse.
+]
+
+{ #category : #html }
+PharoDoc >> generateClassesDoc: anStream and: anPackage [ 
+	| color anPackageArray |
+	anPackageArray := anPackage package classes.
+	color := 'W'.
+	anStream nextPutAll: '<table> <thead> <tr> <th> Classes </th> </tr> </thead>'.
+	anStream nextPutAll: '<tbody> '.
+	anPackageArray do: [ :each | 
+		(self generateClasseDoc: anStream  and: each with: color ).
+		color='W' ifTrue: [ color:='D' ] ifFalse: [ color:='W' ]. 
+		 ].
+	anStream nextPutAll: ' </tbody> </table>'.
+]
+
+{ #category : #html }
 PharoDoc >> generateInstanceVariableDoc: anStream and: anClass [
 	| instanceArray index |
 	instanceArray := anClass instVarNames.
@@ -68,6 +94,15 @@ PharoDoc >> generateMethodsDoc: anStream and: anMethodArray [
 
 { #category : #html }
 PharoDoc >> generatePackageDoc: anPackage [
+	| stream file |
+	file := ((anPackage asString),'-package.html') asFileReference.
+	stream := file writeStream.  
+	"generate head of file"
+	stream nextPutAll: '<body>'.
+	self generateTitleDoc:  stream and: anPackage.
+	self generateClassesDoc: stream and: anPackage.
+	stream nextPutAll: '</body>'. 
+	stream close. 
 ]
 
 { #category : #html }
@@ -94,10 +129,10 @@ PharoDoc >> generateSuperClassDoc: anStream and: anClass [
 ]
 
 { #category : #html }
-PharoDoc >> generateTitleDoc: anStream and: anClass [
-	| class |
-	class := anClass asString.
-	anStream nextPutAll: '<title> ',class,' </title>';
-	nextPutAll: '<h1> ',class,' </h1>';
+PharoDoc >> generateTitleDoc: anStream and: anClassOrPackage [
+	| title |
+	title := anClassOrPackage asString.
+	anStream nextPutAll: '<title> ',title,' </title>';
+	nextPutAll: '<h1> ',title,' </h1>';
 	yourself.
 ]
