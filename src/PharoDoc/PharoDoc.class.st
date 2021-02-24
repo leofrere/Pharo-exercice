@@ -14,7 +14,7 @@ PharoDoc >> generateClassDoc: anClass [
 	self generateTitleDoc: stream and: anClass. 
 	self generateSuperClassDoc: stream and: anClass. 
 	self generateSubClassDoc: stream and: anClass. 
-	"generate instance varible of file"
+	self generateInstanceVariableDoc: stream and: anClass. 
 	self generateMethodsDoc: stream and: (anClass methods). 
 	stream nextPutAll: '</body>'.
 	stream close.
@@ -23,6 +23,21 @@ PharoDoc >> generateClassDoc: anClass [
 
 { #category : #css }
 PharoDoc >> generateClassStyle: anClass [
+]
+
+{ #category : #html }
+PharoDoc >> generateInstanceVariableDoc: anStream and: anClass [
+	| instanceArray index |
+	instanceArray := anClass instVarNames.
+	index := 1.
+	anStream nextPutAll: '<h4> InstanceVariable : '.
+	instanceArray
+		do: [ :each | 
+			index < instanceArray size
+				ifTrue: [ anStream nextPutAll: '<span> ' , each asString , ' </span>, '.
+					index := index + 1 ]
+				ifFalse: [ anStream nextPutAll: '<span> ' , each asString , ' </span>' ] ].
+	anStream nextPutAll: '</h4>'
 ]
 
 { #category : #html }
