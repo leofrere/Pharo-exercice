@@ -9,7 +9,9 @@ PharoDoc >> generateClassDoc: anClass [
 	| stream file |
 	file := ((anClass asString),'.html') asFileReference.
 	stream := file writeStream.
-	"generate head of file"
+	stream nextPutAll: '<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="fr">'.
+	self generateStyleDoc. 
+	self generateHeader: stream and: anClass.
 	stream nextPutAll: '<body>'.
 	self generateTitleDoc: stream and: anClass. 
 	self generateSuperClassDoc: stream and: anClass. 
@@ -17,12 +19,9 @@ PharoDoc >> generateClassDoc: anClass [
 	self generateInstanceVariableDoc: stream and: anClass. 
 	self generateMethodsDoc: stream and: (anClass methods). 
 	stream nextPutAll: '</body>'.
+	stream nextPutAll: '</html>'.
 	stream close.
 	  
-]
-
-{ #category : #css }
-PharoDoc >> generateClassStyle: anClass [
 ]
 
 { #category : #html }
@@ -50,6 +49,17 @@ PharoDoc >> generateClassesDoc: anStream and: anPackage [
 		color='W' ifTrue: [ color:='D' ] ifFalse: [ color:='W' ]. 
 		 ].
 	anStream nextPutAll: ' </tbody> </table>'.
+]
+
+{ #category : #html }
+PharoDoc >> generateHeader: anStream and: anName [
+	| title |
+	title := anName asString.
+	anStream nextPutAll: '<head>
+	<meta charset="UTF-8"/>
+	<title>',title,'</title>
+	<link rel="stylesheet" type="text/css" href="style.css"/>
+</head>'.
 ]
 
 { #category : #html }
@@ -99,12 +109,75 @@ PharoDoc >> generatePackageDoc: anPackage [
 	| stream file |
 	file := ((anPackage asString),'-package.html') asFileReference.
 	stream := file writeStream.  
-	"generate head of file"
+	self generateStyleDoc. 
+	stream nextPutAll: '<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="fr">'.
+	self generateHeader: stream and: anPackage.
 	stream nextPutAll: '<body>'.
 	self generateTitleDoc:  stream and: anPackage.
 	self generateClassesDoc: stream and: anPackage.
 	stream nextPutAll: '</body>'. 
+	stream nextPutAll: '</html>'.
 	stream close. 
+]
+
+{ #category : #css }
+PharoDoc >> generateStyleDoc [
+	|stream file|
+	file := 'style.css' asFileReference.
+	stream := file writeStream.
+	stream nextPutAll: 'tr.clear td{
+    background-color: white;
+    padding-left: 15px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+tr.dark td{
+   background-color: lightgray;
+   padding-left: 15px;
+   padding-top: 5px;
+   padding-bottom: 5px;
+}
+
+th{
+  background-color: lightsteelblue
+}
+
+h1{
+  font-family: arial;
+  border: 1px solid lightgray;
+}
+
+h4{
+  font-family: arial;
+  border: 1px solid lightgray;
+}
+
+a{
+  font-size: 14px;
+  font-family: OCR A Std, monospace;
+  
+}
+
+span{
+  font-size: 14px;
+  font-family: OCR A Std, monospace;
+}
+
+table{
+  font-family: arial;
+  border : 1px solid lightgray;
+  border-collapse: collapse;
+  text-indent: initial;
+  margin-left: auto;
+  margin-right: auto;
+
+}
+
+body{
+  background-color: white;
+}'.
+stream close.
 ]
 
 { #category : #html }
@@ -134,7 +207,6 @@ PharoDoc >> generateSuperClassDoc: anStream and: anClass [
 PharoDoc >> generateTitleDoc: anStream and: anClassOrPackage [
 	| title |
 	title := anClassOrPackage asString.
-	anStream nextPutAll: '<title> ',title,' </title>';
-	nextPutAll: '<h1> ',title,' </h1>';
+	anStream nextPutAll: '<h1> ',title,' </h1>';
 	yourself.
 ]
