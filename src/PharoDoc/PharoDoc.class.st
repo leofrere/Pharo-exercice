@@ -33,6 +33,7 @@ PharoDoc >> generateClasseDoc: anStream and: anClasse with: anColor [
 	anColor='W' ifTrue: [ color := 'clear' ].
 	anStream nextPutAll: '<tr class="',color,'">'.
 	anStream nextPutAll: '<td> <a href="',classe,'.html">',classe,'</a> </td>'.
+	anStream nextPutAll: '<td> ',((anClasse comment) ifNil: 'NoDescription'),'</td>'.
 	anStream nextPutAll: '</tr>'.
 	self generateClassDoc: anClasse.
 ]
@@ -42,7 +43,7 @@ PharoDoc >> generateClassesDoc: anStream and: anPackage [
 	| color anPackageArray |
 	anPackageArray := anPackage package classes.
 	color := 'W'.
-	anStream nextPutAll: '<table> <thead> <tr> <th> Classes </th> </tr> </thead>'.
+	anStream nextPutAll: '<table> <thead> <tr> <th> Classes </th> <th> Description </th> </tr> </thead>'.
 	anStream nextPutAll: '<tbody> '.
 	anPackageArray do: [ :each | 
 		(self generateClasseDoc: anStream  and: each with: color ).
@@ -74,6 +75,7 @@ PharoDoc >> generateMethodDoc: anStream and: anMethod with: anColor [
 	anColor='W' ifTrue: [ color := 'clear' ].
 	anStream nextPutAll: '<tr class="',color,'">'.
 	anStream nextPutAll: '<td> ',method,'</td>'.
+	anStream nextPutAll: '<td> ',((anMethod comment) ifNil: 'NoDescription'),'</td>'.
 	anStream nextPutAll: '</tr>'.
 ]
 
@@ -81,10 +83,10 @@ PharoDoc >> generateMethodDoc: anStream and: anMethod with: anColor [
 PharoDoc >> generateMethodsDoc: anStream and: anMethodArray [
 	| color |
 	color := 'W'.
-	anStream nextPutAll: '<table> <thead> <tr> <th> Methods </th> </tr> </thead>'.
+	anStream nextPutAll: '<table> <thead> <tr> <th> Methods </th>  <th> Description </th> </tr> </thead>'.
 	anStream nextPutAll: '<tbody> '.
 	anMethodArray do: [ :each | 
-		(self generateMethodDoc: anStream  and: each with: color ).
+		(self generateMethodDoc: anStream  and: each with: color).
 		color='W' ifTrue: [ color:='D' ] ifFalse: [ color:='W' ]. 
 		 ].
 	anStream nextPutAll: ' </tbody> </table>'.
