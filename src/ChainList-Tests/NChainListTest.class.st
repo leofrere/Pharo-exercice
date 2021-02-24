@@ -1,6 +1,3 @@
-"
-This class contains tests for ChainList
-"
 Class {
 	#name : #NChainListTest,
 	#superclass : #TestCase,
