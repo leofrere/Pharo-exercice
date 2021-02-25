@@ -1,3 +1,6 @@
+"
+I represent the class to test the ChainList methods.
+"
 Class {
 	#name : #NChainListTest,
 	#superclass : #TestCase,
