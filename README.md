@@ -1,3 +1,5 @@
+## Auteur : Léo FRERE
+
 # Projet:
 
 Le but de ce projet est de représenter une liste chainnée ainsi que de pouvoir générer une "javadoc" pour pharo.
