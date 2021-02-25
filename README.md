@@ -43,11 +43,13 @@ pharoDoc generatePackageDoc: anClass at: 'Users\utilisateur\...\doc' opt: 'windo
 ```
 
 ## Unix choix du dossier:
+(Les informations suivante non pas été testé sur les systems MacOs)
 Pour choisir le dossier dans lequel générer la pharodoc vous pouvez choisir entre rooot et home  comme point de départ puis vous devez donnez un chemin vers le dossier de la manière suivante (/!\ si le dossier n'existe pas la pharodoc ne se générera pas):
 
 Pour une classe.
 ```Pharo
 pharoDoc := PharoDoc new.
+"/!\ root ne fonctionnera pas si pharo n'est pas lancer avec sudo"
 pharoDoc generateClassDoc: anClass at: '...\doc' opt: 'root'.
 pharoDoc generateClassDoc: anClass at: '...\doc' opt: 'home'.
 ```
@@ -55,6 +57,7 @@ pharoDoc generateClassDoc: anClass at: '...\doc' opt: 'home'.
 Pour un Package.
 ```Pharo
 pharoDoc := PharoDoc new.
+"/!\ root ne fonctionnera pas si pharo n'est pas lancer avec sudo"
 pharoDoc generatePackageDoc: anClass at: '...\doc' opt: 'root'.
 pharoDoc generatePackageDoc: anClass at: '...\doc' opt: 'home'.
 ```
