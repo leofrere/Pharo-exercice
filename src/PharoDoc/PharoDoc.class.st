@@ -1,3 +1,6 @@
+"
+I represent a generator of documentation HTML for a class or a package.
+"
 Class {
 	#name : #PharoDoc,
 	#superclass : #Object,
@@ -9,11 +12,13 @@ Class {
 
 { #category : #accesing }
 PharoDoc >> cr [ 	
+	"Return the value of instance Variable cr"
 	^ cr
 ]
 
 { #category : #html }
 PharoDoc >> generateClassDoc: anClass [
+	"Generate a doc html of anClass in directory Pharo Mooc"
 	| stream file |
 	file := ((anClass asString),'html') asFileReference.
 	stream := file writeStream.
@@ -34,10 +39,11 @@ PharoDoc >> generateClassDoc: anClass [
 
 { #category : #html }
 PharoDoc >> generateClassDoc: anClass at: anPath opt: anOption [
+	"Genrate a doc html of AnClass at the location anPath where an option to show de begin of the path"
 	| stream file location |
-	anOption='windows' ifTrue: [ location:=FileLocator C/anPath ].
-	anOption='root' ifTrue: [ location:=FileLocator root/anPath ].
-	anOption='home' ifTrue: [ location:=FileLocator home/anPath ].
+	anOption='windows' ifTrue: [ location:=FileLocator C/anPath ]. "option 'windows' if you are on a windows system"
+	anOption='root' ifTrue: [ location:=FileLocator root/anPath ]. "option 'root' to begin the path at root"
+	anOption='home' ifTrue: [ location:=FileLocator home/anPath ]. "option 'home' to begin the path at home"
 	file := (location/(anClass asString),'html') asFileReference.
 	stream := file writeStream.
 	stream nextPutAll: '<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="fr">',cr.
@@ -57,6 +63,7 @@ PharoDoc >> generateClassDoc: anClass at: anPath opt: anOption [
 
 { #category : #html }
 PharoDoc >> generateClasseDoc: anStream and: anClasse with: anColor [
+	"Generate a row html with a column for nameClasse and another for the description"
 	| color classe |
 	classe:= anClasse name.
 	color := 'dark'.
@@ -70,12 +77,13 @@ PharoDoc >> generateClasseDoc: anStream and: anClasse with: anColor [
 
 { #category : #html }
 PharoDoc >> generateClasseDoc: anStream and: anClasse with: anColor at: anPath opt: anOption [ 
+	"Generate a row html with a column for nameClasse and another for the description. anPath and anOtion transmit to generateClassDoc"
 	| color classe |
 	classe:= anClasse name.
 	color := 'dark'.
 	anColor='W' ifTrue: [ color := 'clear' ].
 	anStream nextPutAll: '<tr class="',color,'">',cr.
-	anStream nextPutAll: '<td> <a href="',classe,'html">',classe,'</a> </td>',cr.
+	anStream nextPutAll: '<td> <a href="',classe,'.html">',classe,'</a> </td>',cr.
 	anStream nextPutAll: '<td> ',((anClasse comment) ifNil: 'NoDescription'),'</td>',cr.
 	anStream nextPutAll: '</tr>',cr.
 	self generateClassDoc: anClasse at: anPath opt: anOption.
@@ -83,6 +91,7 @@ PharoDoc >> generateClasseDoc: anStream and: anClasse with: anColor at: anPath o
 
 { #category : #html }
 PharoDoc >> generateClassesDoc: anStream and: anPackage [ 
+	"Generate a rtable html with a column for nameClasse and another for the description"
 	| color anPackageArray |
 	anPackageArray := anPackage package classes.
 	color := 'W'.
@@ -104,6 +113,7 @@ PharoDoc >> generateClassesDoc: anStream and: anPackage [
 
 { #category : #html }
 PharoDoc >> generateClassesDoc: anStream and: anPackage at: anPath opt: anOption [ 
+	"Generate a table html with a column for nameClasse and another for the description. anPath and anOtion transmit to generateClassDoc"
 	| color anPackageArray |
 	anPackageArray := anPackage package classes.
 	color := 'W'.
@@ -125,6 +135,7 @@ PharoDoc >> generateClassesDoc: anStream and: anPackage at: anPath opt: anOption
 
 { #category : #html }
 PharoDoc >> generateHeader: anStream and: anName [
+	"Generate the head for a html file"
 	| title |
 	title := anName asString.
 	anStream nextPutAll: '<head>
@@ -136,6 +147,7 @@ PharoDoc >> generateHeader: anStream and: anName [
 
 { #category : #html }
 PharoDoc >> generateInstanceVariableDoc: anStream and: anClass [
+	"Generate the html code to display instance variables"
 	| instanceArray index |
 	instanceArray := anClass instVarNames.
 	index := 1.
@@ -151,6 +163,7 @@ PharoDoc >> generateInstanceVariableDoc: anStream and: anClass [
 
 { #category : #html }
 PharoDoc >> generateMethodDoc: anStream and: anMethod with: anColor [
+	"Generate the row html to display the name and description of method"
 	| color method |
 	method:= anMethod name.
 	color := 'dark'.
@@ -163,6 +176,7 @@ PharoDoc >> generateMethodDoc: anStream and: anMethod with: anColor [
 
 { #category : #html }
 PharoDoc >> generateMethodsDoc: anStream and: anMethodArray [
+	"Generate a table html to display the information of differents method"
 	| color |
 	color := 'W'.
 	anStream nextPutAll: '<table>
@@ -185,6 +199,7 @@ PharoDoc >> generateMethodsDoc: anStream and: anMethodArray [
 
 { #category : #html }
 PharoDoc >> generatePackageDoc: anPackage [
+	"Generate file html with the description of different class of package and generate for every class in packages it doc"
 	| stream file |
 	file := ((anPackage asString),'package.html') asFileReference.
 	stream := file writeStream.  
@@ -201,10 +216,11 @@ PharoDoc >> generatePackageDoc: anPackage [
 
 { #category : #html }
 PharoDoc >> generatePackageDoc: anPackage at: anPath opt: anOption [ 
+	"Generate file html with the description of different class of package and generate for every class in packages it doc in anPath with anOption to choose the begin of the path"
 	| stream file location |
-	anOption='windows' ifTrue: [ location:=FileLocator C/anPath ].
-	anOption='root' ifTrue: [ location:=FileLocator root/anPath ].
-	anOption='home' ifTrue: [ location:=FileLocator home/anPath ].
+	anOption='windows' ifTrue: [ location:=FileLocator C/anPath ]. "option 'windows' if you are on a windows system"
+	anOption='root' ifTrue: [ location:=FileLocator root/anPath ]. "option 'root' to begin the path at root"
+	anOption='home' ifTrue: [ location:=FileLocator home/anPath ]. "option 'home' to begin the path at home"
 	file := (location/(anPackage asString),'package.html') asFileReference.
 	stream := file writeStream.  
 	self generateStyleDoc. 
@@ -220,6 +236,7 @@ PharoDoc >> generatePackageDoc: anPackage at: anPath opt: anOption [
 
 { #category : #css }
 PharoDoc >> generateStyleDoc [
+	"Generate a file style.css in directory Pharo Mooc"
 	|stream file|
 	file := 'style.css' asFileReference.
 	stream := file writeStream.
@@ -280,10 +297,11 @@ stream close.
 
 { #category : #css }
 PharoDoc >> generateStyleDoc: anPath opt: anOption [
+	"Generate a file style.css at the location anPath where an option to show de begin of the path"
 	|stream file location |
-	anOption='windows' ifTrue: [ location:=FileLocator C/anPath ].
-	anOption='root' ifTrue: [ location:=FileLocator root/anPath ].
-	anOption='home' ifTrue: [ location:=FileLocator home/anPath ].
+	anOption='windows' ifTrue: [ location:=FileLocator C/anPath ]. "option 'windows' if you are on a windows system"
+	anOption='root' ifTrue: [ location:=FileLocator root/anPath ]. "option 'root' to begin the path at root"
+	anOption='home' ifTrue: [ location:=FileLocator home/anPath ]. "option 'home' to begin the path at home"
 	file := (location/'style.css') asFileReference.
 	stream := file writeStream.
 	stream nextPutAll: 'tr.clear td{
@@ -343,6 +361,7 @@ stream close.
 
 { #category : #html }
 PharoDoc >> generateSubClassDoc: anStream and: anClass [
+	"Generate the html code to display the subclass of anClass"
 	| subClassArray index |
 	index := 1.
 	subClassArray := anClass subclasses.
@@ -355,6 +374,7 @@ PharoDoc >> generateSubClassDoc: anStream and: anClass [
 
 { #category : #html }
 PharoDoc >> generateSuperClassDoc: anStream and: anClass [
+	"Generate the html code to display the superclass of anClass"
 	| superClassName |
 	superClassName := anClass  superclass.
 	superClassName ifNotNil: [ 
@@ -366,6 +386,7 @@ PharoDoc >> generateSuperClassDoc: anStream and: anClass [
 
 { #category : #html }
 PharoDoc >> generateTitleDoc: anStream and: anClassOrPackage [
+	"Genrate a title with name of Class or Package for an html document"
 	| title |
 	title := anClassOrPackage asString.
 	anStream nextPutAll: '<h1> ',title,' </h1>',cr;
@@ -373,7 +394,8 @@ PharoDoc >> generateTitleDoc: anStream and: anClassOrPackage [
 ]
 
 { #category : #initialization }
-PharoDoc >> initialize [ 	
+PharoDoc >> initialize [ 
+	"Initialize an PharoDoc Object"	
 	super initialize.
 	cr := (Character cr) asString.
 ]
