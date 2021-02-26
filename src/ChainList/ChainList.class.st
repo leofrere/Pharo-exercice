@@ -1,5 +1,5 @@
 "
-I represent LinkedList with a head and a tail.
+I represent LinkedList with an head and a tail.
 "
 Class {
 	#name : #ChainList,

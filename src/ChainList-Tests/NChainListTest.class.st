@@ -141,7 +141,8 @@ NChainListTest >> testIndexOf [
 { #category : #tests }
 NChainListTest >> testInitializeChainList [
 	self assert: (l head) isNil.
-	self assert: (l tail) isNil.  
+	self assert: (l tail) isNil. 
+	self assert: (l size) equals: 0. 
 ]
 
 { #category : #tests }
